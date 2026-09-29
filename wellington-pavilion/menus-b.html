@@ -1,0 +1,300 @@
+<title>Wellington Pavilion Menu B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow menu column, venue switch at top, each dish a price line with recipe costing underneath */
+:root{
+  --bg:#f1f3f0; --paper:#fbfcfa; --ink:#1d2925; --muted:#5d6a64; --rule:#d5dbd6;
+  --sea:#2c5a78; --ochre:#9a6b1c; --accent:var(--sea);
+  --good:#2f7a4f; --warn:#a4661a; --bad:#a63a2e;
+  --display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121815; --paper:#18201c; --ink:#e4ebe6; --muted:#98a69f; --rule:#2c3833;
+  --sea:#7fb0d1; --ochre:#dcae5c; --good:#6cc08f; --warn:#e0a458; --bad:#e58576; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121815; --paper:#18201c; --ink:#e4ebe6; --muted:#98a69f; --rule:#2c3833;
+  --sea:#7fb0d1; --ochre:#dcae5c; --good:#6cc08f; --warn:#e0a458; --bad:#e58576; color-scheme:dark}
+body.pub{--accent:var(--ochre)}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:800px;margin:0 auto;display:grid;gap:28px}
+header{display:grid;gap:10px}
+.eyebrow{font:500 11px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font:400 clamp(40px,8vw,64px)/1 var(--display);margin:0;text-wrap:balance}
+h1 em{color:var(--accent);font-style:italic}
+.lede{color:var(--muted);max-width:64ch;margin:0}
+.switch{display:flex;gap:6px;flex-wrap:wrap}
+.switch button{font:500 14px var(--body);border:1px solid var(--rule);background:var(--paper);color:var(--ink);padding:10px 16px;border-radius:999px;cursor:pointer}
+.switch button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.switch button:focus-visible,.toggle:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.venue{display:grid;gap:22px}
+.concept{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:18px}
+.concept div{min-width:0}
+.concept b{display:block;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.concept span{font-size:14px}
+.brief{margin:0;max-width:65ch}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:12px}
+.toggle{font:500 13px var(--body);background:none;border:1px solid var(--rule);color:var(--ink);border-radius:6px;padding:7px 12px;cursor:pointer}
+.legend{font:12px var(--mono);color:var(--muted)}
+section.course{display:grid;gap:4px}
+.course h2{font:400 30px/1.1 var(--display);margin:14px 0 2px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.course h2 small{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.note{color:var(--muted);font-size:13px;margin:0 0 6px;font-style:italic}
+.dish{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:10px 0;border-bottom:1px dashed var(--rule)}
+.dish .n{font-weight:600;min-width:0}
+.dish .d{color:var(--muted);font-size:14px;grid-column:1;min-width:0}
+.dish .p{font:500 14px var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.tags{font:500 10px var(--mono);letter-spacing:.06em;color:var(--accent);margin-left:6px}
+.cost{grid-column:1/-1;display:none;gap:6px;margin-top:6px;font:12px/1.5 var(--mono);font-variant-numeric:tabular-nums;color:var(--muted)}
+.showcost .cost{display:grid}
+.cost .head{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.cost ul{list-style:none;margin:0;padding:0 0 0 10px;border-left:2px solid var(--rule)}
+.cost li{display:flex;justify-content:space-between;gap:10px}
+.cost li span:first-child{min-width:0}
+.est{color:var(--warn)}
+.pill{padding:1px 7px;border-radius:4px;border:1px solid currentColor}
+.pill.good{color:var(--good)}.pill.warn{color:var(--warn)}.pill.bad{color:var(--bad)}
+.summary{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:18px;display:grid;gap:12px;min-width:0}
+.summary h3{font:400 24px var(--display);margin:0}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+td.r,th.r{text-align:right;white-space:nowrap}
+td a{color:var(--accent)}
+.specials{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.specials div{border-top:2px solid var(--accent);padding-top:8px;min-width:0}
+.specials b{display:block}
+.specials span{color:var(--muted);font-size:14px}
+.chip{font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.chip.src{color:var(--good);border:1px solid var(--good)}
+.chip.est{color:var(--warn);border:1px solid var(--warn)}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--rule);padding-top:14px;display:grid;gap:8px}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Wellington Pavilion · Wellington, NZ · Menu B (backup) · Sept 2026</div>
+    <h1>Menu B, <em>the backup</em></h1>
+    <p class="lede">A 95-seat dining room cooking Mediterranean over fire with New Zealand produce, and a 180-seat public bar built for beers, pizzas and long afternoons. Prices in NZD incl. 15% GST. Turn on costings to see each dish's recipe, plate cost and food cost %, built from NZ prices researched in September 2026.</p>
+    <div class="switch" role="tablist">
+      <button role="tab" id="tab-dining" aria-selected="true" data-v="dining">Dining Room · 95</button>
+      <button role="tab" id="tab-pub" aria-selected="false" data-v="pub">Public Bar · 180</button>
+      <button role="tab" id="tab-book" aria-selected="false" data-v="book">Price book</button>
+    </div>
+  </header>
+  <main id="venue" class="venue"></main>
+  <footer>
+    <span>How the costing works. Each dish lists its main ingredients by weight, priced from the price book. "Everything else" covers sauces, garnish, bread and oil, and it's an estimate. Menu price is divided by 1.15 to remove GST before food cost % is calculated.</span>
+    <span>Sourced prices are mostly published retail or online seafood-merchant prices, so they run higher than a trade account. Your real food cost should come in 10–20% under these numbers once Bidfood, Gilmours or Service Foods quote you. Treat anything amber as a target that still needs a quote.</span>
+    <span>V vegetarian · VG vegan · GF gluten free · DF dairy free</span>
+  </footer>
+</div>
+
+<script>
+/* Price book. p = price in NZD, u = unit, g = true if price includes GST.
+   s = "src" (published NZ price, Sept 2026 research) or "est" (no public price found, needs supplier quote). */
+const PB = {
+  oys_tk:{n:"Te Kouma Pacific oysters, half shell",p:2.08,u:"each",g:true,s:"src",ref:"Kiwi Fish, $49.95 per 2 dozen",url:"https://www.kiwifish.co.nz/shop-online/oysters-and-shellfish"},
+  oys_bl:{n:"Bluff oysters, 1st grade (Mar–Aug season)",p:4.00,u:"each",g:true,s:"src",ref:"$48/doz pottled, 2nd grade $35–38/doz",url:"https://www.stuff.co.nz/nz-news/360948636/dozen-bluff-oysters-pushing-50-nz-supermarkets"},
+  cray:{n:"Crayfish, fresh whole",p:140,u:"kg",g:true,s:"src",ref:"Solander $140/kg fresh; live $199.99/kg (Oceangold)",url:"https://www.gourmetseafood.co.nz/crayfish-whole-fresh"},
+  paua:{n:"Pāua meat, wild blackfoot",p:130,u:"kg",g:true,s:"src",ref:"Solander, $260 per 2kg frozen",url:"https://www.gourmetseafood.co.nz/shellfish/paua"},
+  tuatua:{n:"Tuatua clams, live",p:18.90,u:"kg",g:true,s:"src",ref:"$18.90/kg live; frozen $29.90/kg (Saltwater)",url:"https://www.hawkesbayseafoods.co.nz/product/1630900/"},
+  snapper:{n:"Snapper, whole 1–1.5kg, gilled & gutted",p:19.90,u:"kg",g:true,s:"src",ref:"Wellington Seamarket, $19.90 (confirm per-kg)",url:"https://www.wellingtonseamarket.com/products/snapper-whole-gilled-gutted-and-scaled"},
+  tarakihi:{n:"Tarakihi fillets, skinned & boned",p:44,u:"kg",g:true,s:"src",ref:"Saltwater Seafoods, from $22 (confirm pack size)",url:"https://www.saltwaterseafoods.co.nz/shop/p/tarakihi-fillets"},
+  squid:{n:"Arrow squid",p:23,u:"kg",g:true,s:"src",ref:"Wellington retail range $18.08–$28.08/kg, midpoint",url:"https://www.selinawamucii.com/insights/prices/new-zealand/cuttlefish-squid/"},
+  lamb_sh:{n:"Lamb shoulder, bone-in",p:21.99,u:"kg",g:true,s:"src",ref:"PAK'nSAVE; boned & rolled $43.99 (Matangi)",url:"https://www.paknsave.co.nz/shop/category/meat-poultry-and-seafood/lamb?pg=1"},
+  mince:{n:"Beef mince",p:24.40,u:"kg",g:true,s:"src",ref:"Stats NZ avg retail, July 2026 (record high)",url:"https://www.nzherald.co.nz/business/companies/agribusiness/nz-beef-mince-prices-climb-above-2440-a-kg-as-export-demand-stays-strong/T5HSP6EOMBA3ZFLHBES6AH6SU4/"},
+  chk_thigh:{n:"Chicken thigh, boneless skinless",p:25.99,u:"kg",g:true,s:"src",ref:"NZ supermarket retail, Sept 2026",url:"https://www.woolworths.co.nz/shop/browse/meat-poultry/chicken-poultry/chicken-thighs"},
+  chk_breast:{n:"Chicken breast fillet",p:21.99,u:"kg",g:true,s:"src",ref:"NZ supermarket retail, $21.99–27.99",url:"https://www.paknsave.co.nz/shop/category/meat-poultry-and-seafood/chicken--poultry?pg=1"},
+  chk_whole:{n:"Chicken, whole",p:11,u:"kg",g:true,s:"src",ref:"Wellington/Auckland range $6.35–12.54/kg",url:"https://www.selinawamucii.com/insights/prices/new-zealand/chicken-meat/"},
+  pork_belly:{n:"Pork belly, frozen (imported)",p:8.95,u:"kg",g:false,s:"src",ref:"Gilmours Buyer's Guide BG09, Feb–Mar 2026 (trade)",url:"https://creativehub-delivery.foodstuffs.co.nz/api/public/content/BG09Pricelist2026?v=7ef165f9"},
+  venison:{n:"Venison back steak (backstrap)",p:60,u:"kg",g:true,s:"src",ref:"NZ butcher retail, around $60/kg",url:"https://www.nzherald.co.nz/nz/venison-fetching-up-to-99-a-kilo/YF2YNFNQIDUWZRIN7TZASMHVFA/"},
+  kumara:{n:"Kūmara",p:7,u:"kg",g:true,s:"src",ref:"RNZ, red and gold around $7/kg",url:"https://www.rnz.co.nz/news/business/510624/kumara-prices-tipped-to-drop-as-supply-improves"},
+  butter:{n:"Butter",p:15.98,u:"kg",g:true,s:"src",ref:"Anchor 500g $7.99 (PriceMe)",url:"https://www.priceme.co.nz/Anchor-Pure-Butter-500g/p-924349689.aspx"},
+  kingfish:{n:"Kingfish (haku) fillet, skin off",p:55,u:"kg",g:true,s:"est",ref:"No public price found. Quote from Haku / Solander"},
+  hapuku:{n:"Hāpuku fillet",p:48,u:"kg",g:true,s:"est",ref:"No public price found. Quote from Solander / Talley's"},
+  eyefillet:{n:"Beef eye fillet",p:65,u:"kg",g:true,s:"est",ref:"Estimate. Quote from Bidfood / local butcher"},
+  wagyu:{n:"First Light wagyu rump MBS 6+",p:80,u:"kg",g:true,s:"est",ref:"First Light doesn't publish trade prices"},
+  sirloin:{n:"Beef sirloin (striploin)",p:45,u:"kg",g:true,s:"est",ref:"Estimate. Beef at record highs in 2026"},
+  shank:{n:"Lamb shank",p:18,u:"kg",g:true,s:"est",ref:"Estimate"},
+  mussels:{n:"Green-lipped mussels, live",p:8,u:"kg",g:true,s:"est",ref:"Estimate. Quote from Sanford / Marlborough"},
+  whitebait:{n:"Whitebait, fresh (Sept–Nov season)",p:140,u:"kg",g:true,s:"est",ref:"Estimate. Price swings week to week in season"},
+  prawns:{n:"Prawns, raw peeled (imported)",p:30,u:"kg",g:true,s:"est",ref:"Estimate"},
+  mozz:{n:"Mozzarella, pizza grade",p:16,u:"kg",g:true,s:"est",ref:"In Gilmours BG09; price not captured"},
+  feta:{n:"Feta",p:20,u:"kg",g:true,s:"est",ref:"Estimate"},
+  potato:{n:"Agria potatoes / chips",p:3.5,u:"kg",g:true,s:"est",ref:"Estimate"},
+  flour:{n:"Flour, 00 / high grade",p:2.5,u:"kg",g:true,s:"est",ref:"Estimate"},
+  porkmince:{n:"Pork mince",p:16,u:"kg",g:true,s:"est",ref:"Estimate"},
+  wings:{n:"Chicken wings",p:9,u:"kg",g:true,s:"est",ref:"Estimate"},
+  eggplant:{n:"Eggplant",p:8,u:"kg",g:true,s:"est",ref:"Estimate"},
+  gurnard:{n:"Gurnard fillets, skinned & boned",p:44,u:"kg",g:true,s:"src",ref:"Saltwater Seafoods, from $22 (confirm pack size)",url:"https://www.saltwaterseafoods.co.nz/shop/fresh-fish/fillets"},
+  bluecod:{n:"Blue cod fillets",p:60,u:"kg",g:true,s:"est",ref:"No public price found. Quote from Sanford / Solander"},
+  salmon:{n:"Ōra King salmon fillet",p:50,u:"kg",g:true,s:"est",ref:"No NZ price found. Quote from NZ King Salmon"},
+  octopus:{n:"Octopus, cooked tentacle",p:30,u:"kg",g:true,s:"est",ref:"Estimate"},
+  kahawai:{n:"Kahawai, hot-smoked",p:30,u:"kg",g:true,s:"est",ref:"Estimate"},
+  halloumi:{n:"Halloumi",p:26,u:"kg",g:true,s:"est",ref:"Estimate"},
+  ricotta:{n:"Ricotta",p:12,u:"kg",g:true,s:"est",ref:"Estimate"},
+  lambmince:{n:"Lamb mince",p:22,u:"kg",g:true,s:"est",ref:"Estimate"},
+  lambrib:{n:"Lamb ribs (breast)",p:16,u:"kg",g:true,s:"est",ref:"Estimate"},
+  lambrump:{n:"Lamb rump",p:40,u:"kg",g:true,s:"est",ref:"Estimate"},
+  duck:{n:"Duck legs",p:22,u:"kg",g:true,s:"est",ref:"Estimate. Quote from Canterbury duck supplier"},
+  shortrib:{n:"Beef short rib, bone-in",p:28,u:"kg",g:true,s:"est",ref:"Estimate. Beef at record highs in 2026"},
+  chuck:{n:"Beef chuck",p:22,u:"kg",g:true,s:"est",ref:"Estimate"},
+  brisket:{n:"Beef brisket",p:20,u:"kg",g:true,s:"est",ref:"Estimate"},
+  scotch:{n:"Scotch fillet (ribeye)",p:55,u:"kg",g:true,s:"est",ref:"Estimate"},
+  porkshoulder:{n:"Pork shoulder, bone-in",p:14,u:"kg",g:true,s:"est",ref:"Estimate"},
+  egg:{n:"Free-range eggs",p:0.75,u:"each",g:true,s:"est",ref:"Estimate"}
+};
+
+/* Dishes: n name, d description, p menu price (text), pn price used for costing, t tags, c [[ingredient, qty in kg or each]], o everything else ex GST (estimate) */
+const V = {
+dining:{
+  brief:"Menu B for the dining room. Same Belongil and Rick Shores feel, with a different set of dishes. It leans more towards the Eastern Mediterranean and the grill: smoked fish, lamb, slow-cooked shared cuts and hand-made pasta, all on New Zealand produce. Share-style, built for a table of four to order 5 to 6 small plates, 2 large and sides.",
+  concept:[["Style","Share plates, grill and slow roasts"],["Target spend","$100 food / $150 total per head"],["Target food cost","26–28% blended"],["Covers","95 seats, 2 turns Fri–Sat"]],
+  courses:[
+   {h:"Snacks",note:"",items:[
+    {n:"Smoked kahawai croquette",d:"Lemon aioli, dill",p:"8 ea",pn:8,t:"",c:[["kahawai",0.03],["potato",0.04]],o:0.6},
+    {n:"Sourdough & cultured butter",d:"Kelp salt",p:"10",pn:10,t:"V",c:[["flour",0.1],["butter",0.03]],o:0.8},
+    {n:"Lamb & pine nut kibbeh",d:"Mint yoghurt",p:"8 ea",pn:8,t:"",c:[["lambmince",0.04]],o:0.6},
+    {n:"Fried halloumi",d:"Mānuka honey, thyme, black pepper",p:"16",pn:16,t:"V GF",c:[["halloumi",0.1]],o:1.0}]},
+   {h:"Small Plates",note:"",items:[
+    {n:"Ōra King salmon crudo",d:"Yuzu kosho, cucumber, dill oil",p:"29",pn:29,t:"GF DF",c:[["salmon",0.08]],o:1.6},
+    {n:"Grilled octopus",d:"Chickpea, smoked paprika, preserved lemon",p:"32",pn:32,t:"GF DF",c:[["octopus",0.18]],o:2.0},
+    {n:"Gurnard skewers",d:"Chermoula, charred lime",p:"26",pn:26,t:"GF DF",c:[["gurnard",0.12]],o:1.5},
+    {n:"Duck liver parfait",d:"Feijoa chutney, toasted brioche",p:"24",pn:24,t:"",c:[],o:3.2},
+    {n:"Whipped ricotta",d:"Roast grapes, walnut, honey, grilled bread",p:"22",pn:22,t:"V",c:[["ricotta",0.1]],o:2.0},
+    {n:"Sticky lamb ribs",d:"Pomegranate glaze, sumac, herbs",p:"28",pn:28,t:"GF DF",c:[["lambrib",0.35]],o:1.5}]},
+   {h:"Large Plates",note:"Built to share.",items:[
+    {n:"Blue cod",d:"Saffron beurre blanc, shaved fennel",p:"48",pn:48,t:"GF",c:[["bluecod",0.2],["butter",0.03]],o:2.0},
+    {n:"Ōra King salmon",d:"Harissa, charred lemon, freekeh",p:"46",pn:46,t:"DF",c:[["salmon",0.2]],o:2.5},
+    {n:"Braised beef short rib, for 2",d:"Black garlic, horseradish cream, pickled shallot",p:"105",pn:105,t:"GF",c:[["shortrib",1.1]],o:5.0},
+    {n:"Lamb rump",d:"Smoked eggplant, salsa verde",p:"52",pn:52,t:"GF DF",c:[["lambrump",0.22],["eggplant",0.15]],o:2.5},
+    {n:"Duck leg confit",d:"Cherries, witloof, orange",p:"46",pn:46,t:"GF DF",c:[["duck",0.35]],o:2.8},
+    {n:"Porchetta, for 2–3",d:"Crackling, salsa rossa, fennel slaw",p:"98",pn:98,t:"GF DF",c:[["porkshoulder",1.2]],o:6.0},
+    {n:"Potato gnocchi",d:"Brown butter, sage, pecorino, hazelnut",p:"36",pn:36,t:"V",c:[["potato",0.25],["flour",0.06],["butter",0.04]],o:2.0}]},
+   {h:"Sides",note:"",items:[
+    {n:"Charred cabbage",d:"Anchovy butter, breadcrumbs",p:"14",pn:14,t:"",c:[["butter",0.03]],o:1.2},
+    {n:"Heirloom tomatoes",d:"Oregano, red onion, olive oil",p:"15",pn:15,t:"VG GF",c:[],o:3.0},
+    {n:"Smoked kūmara",d:"Labneh, chilli butter",p:"15",pn:15,t:"V GF",c:[["kumara",0.3]],o:1.0},
+    {n:"Green beans",d:"Almond, brown butter, lemon",p:"14",pn:14,t:"V GF",c:[["butter",0.02]],o:2.4}]},
+   {h:"Dessert",note:"",items:[
+    {n:"Tiramisu",d:"Espresso, mascarpone, cocoa",p:"18",pn:18,t:"V",c:[],o:2.8},
+    {n:"Lemon posset",d:"Feijoa, shortbread",p:"17",pn:17,t:"V",c:[["butter",0.02]],o:2.2},
+    {n:"Baklava",d:"Orange blossom, mānuka yoghurt ice cream",p:"19",pn:19,t:"V",c:[],o:3.2},
+    {n:"Affogato",d:"Vanilla gelato, espresso, Frangelico",p:"16",pn:16,t:"V GF",c:[],o:3.0}]},
+   {h:"Trust the Kitchen",note:"Whole table.",items:[
+    {n:"Chef's table menu",d:"Snacks, small plates, a large plate, sides and dessert",p:"109 pp",pn:109,t:"",c:[],o:29.5},
+    {n:"Chef's table menu, premium",d:"Adds the short rib, octopus and blue cod",p:"149 pp",pn:149,t:"",c:[],o:45}]}
+  ],
+  specials:[["Sunday Porchetta Lunch","Porchetta for the table, sides and a glass of wine, $69 pp"],["Tuesday Pasta Night","Gnocchi or a pasta of the week plus a glass of wine, $45"],["Crayfish Night, monthly","Whole crayfish at market price. Sell it as an event and pre-book it"]]
+},
+pub:{
+  brief:"Menu B for the bar. Same Felons and Burleigh Pav energy with a different line-up: a smoker, pies, curry, smash-style lamb burgers, pizzas you won't see in menu A, and snacks built for the beer garden.",
+  concept:[["Style","Counter or QR order, share-friendly"],["Target spend","$44 food / $70 total per head"],["Target food cost","24–26% blended"],["Covers","180 seats plus beer garden"]],
+  courses:[
+   {h:"Snacks",note:"",items:[
+    {n:"Wedges",d:"Sour cream, sweet chilli",p:"14",pn:14,t:"V GF",c:[["potato",0.35]],o:1.2},
+    {n:"Beer-battered onion rings",d:"Chipotle mayo",p:"13",pn:13,t:"V",c:[],o:1.8},
+    {n:"Smoked kahawai dip",d:"Crackers, pickled onion",p:"17",pn:17,t:"",c:[["kahawai",0.08]],o:1.4},
+    {n:"Halloumi fries",d:"Hot honey, za'atar",p:"18",pn:18,t:"V",c:[["halloumi",0.12]],o:1.0},
+    {n:"Mussel fritters",d:"Lemon, tartare",p:"19",pn:19,t:"",c:[["mussels",0.4]],o:1.5},
+    {n:"Cheeseburger spring rolls",d:"Burger sauce",p:"16",pn:16,t:"",c:[["mince",0.1]],o:1.4},
+    {n:"Korean fried cauliflower",d:"Gochujang glaze, sesame, spring onion",p:"17",pn:17,t:"VG",c:[],o:2.6},
+    {n:"Pork scotch egg",d:"Piccalilli",p:"12",pn:12,t:"",c:[["porkmince",0.08],["egg",1]],o:0.6}]},
+   {h:"Wood-fired Pizza",note:"Gluten-free base +$4.",items:[
+    {n:"Four cheese",d:"Mozzarella, gorgonzola, parmesan, ricotta, honey",p:"28",pn:28,t:"V",c:[["flour",0.18],["mozz",0.1],["ricotta",0.04]],o:3.0},
+    {n:"Chorizo",d:"Roast capsicum, olives, chilli",p:"28",pn:28,t:"",c:[["flour",0.18],["mozz",0.12]],o:2.8},
+    {n:"Hot-smoked salmon",d:"Crème fraîche, capers, red onion, dill",p:"32",pn:32,t:"",c:[["flour",0.18],["salmon",0.08]],o:2.0},
+    {n:"Pulled pork",d:"BBQ sauce, pickled red onion, coriander",p:"29",pn:29,t:"",c:[["flour",0.18],["mozz",0.1],["porkshoulder",0.12]],o:1.6},
+    {n:"Chicken, cranberry & brie",d:"Rocket, balsamic",p:"29",pn:29,t:"",c:[["flour",0.18],["mozz",0.08],["chk_thigh",0.1]],o:2.4},
+    {n:"Roast pumpkin",d:"Feta, sage, pine nuts",p:"26",pn:26,t:"V",c:[["flour",0.18],["mozz",0.08],["feta",0.05]],o:1.6}]},
+   {h:"Burgers",note:"All served with chips.",items:[
+    {n:"Smoked brisket burger",d:"Slaw, pickles, BBQ sauce, cheddar",p:"29",pn:29,t:"",c:[["brisket",0.18],["potato",0.25]],o:2.0},
+    {n:"Lamb burger",d:"Feta, tzatziki, pickled cucumber, mint",p:"28",pn:28,t:"",c:[["lambmince",0.18],["feta",0.03],["potato",0.25]],o:1.8},
+    {n:"Pulled pork burger",d:"Apple slaw, chipotle mayo",p:"26",pn:26,t:"",c:[["porkshoulder",0.18],["potato",0.25]],o:1.8},
+    {n:"Mushroom & halloumi burger",d:"Roast portobello, aioli, rocket",p:"25",pn:25,t:"V",c:[["halloumi",0.08],["potato",0.25]],o:2.2}]},
+   {h:"Mains",note:"",items:[
+    {n:"Gurnard & chips",d:"Beer batter, tartare, lemon, slaw",p:"32",pn:32,t:"DF",c:[["gurnard",0.18],["potato",0.3]],o:1.5},
+    {n:"Beef & Guinness pie",d:"Mash, peas, gravy",p:"30",pn:30,t:"",c:[["chuck",0.25],["potato",0.25]],o:2.0},
+    {n:"Butter chicken",d:"Basmati rice, garlic naan, raita",p:"29",pn:29,t:"",c:[["chk_thigh",0.2],["butter",0.03]],o:2.0},
+    {n:"Scotch fillet 300g",d:"Chips, peppercorn sauce, leaves",p:"56",pn:56,t:"GF",c:[["scotch",0.3],["potato",0.3]],o:1.5},
+    {n:"Bangers & mash",d:"Pork sausages, onion gravy, peas",p:"28",pn:28,t:"",c:[["porkmince",0.25],["potato",0.3]],o:1.4},
+    {n:"Salmon poke bowl",d:"Sushi rice, edamame, avocado, sesame",p:"29",pn:29,t:"GF DF",c:[["salmon",0.12]],o:2.8},
+    {n:"Pumpkin & feta salad",d:"Quinoa, spinach, seeds. Add chicken +$7",p:"22",pn:22,t:"V GF",c:[["feta",0.05]],o:2.4}]},
+   {h:"To Share",note:"",items:[
+    {n:"Smoked meat tray, for 2",d:"Brisket, pulled pork, chicken thigh, pickles, slaw, white bread",p:"89",pn:89,t:"",c:[["brisket",0.25],["porkshoulder",0.25],["chk_thigh",0.2]],o:5.0},
+    {n:"Loaded nachos",d:"Beef chilli, cheese, guacamole, sour cream, jalapeño",p:"32",pn:32,t:"GF",c:[["mince",0.15]],o:3.5}]},
+   {h:"Kids, under 12",note:"Includes a juice and a soft serve. Kids meals run above target on purpose: they bring the parents in.",items:[
+    {n:"Chicken nuggets & chips",d:"",p:"18",pn:18,t:"",c:[["chk_breast",0.1],["potato",0.15]],o:2.4},
+    {n:"Mac & cheese",d:"",p:"16",pn:16,t:"V",c:[],o:3.0},
+    {n:"Fish bites & chips",d:"",p:"18",pn:18,t:"",c:[["gurnard",0.08],["potato",0.15]],o:2.4}]},
+   {h:"Sweet",note:"",items:[
+    {n:"Chocolate brownie",d:"Vanilla ice cream, chocolate sauce",p:"14",pn:14,t:"V",c:[["butter",0.03]],o:1.8},
+    {n:"Apple crumble",d:"Custard",p:"15",pn:15,t:"V",c:[["butter",0.03]],o:1.8},
+    {n:"Lolly cake sundae",d:"Vanilla soft serve, lolly cake crumb",p:"12",pn:12,t:"V",c:[],o:1.8}]}
+  ],
+  specials:[["Monday Burger & Beer","Any burger and a pint, $30"],["Wednesday Pie Night","Beef & Guinness pie and a pint, $32"],["Friday Fish & Chips","Gurnard and chips with a pint, $36"],["Sunday Smoke","Smoked meat tray for 2 and a jug, $110. Live music from 3pm"]]
+}};
+
+let venue="dining", showCost=false;
+try{venue=localStorage.getItem("wpb-venue")||"dining"; showCost=localStorage.getItem("wpb-cost")==="1"}catch(e){}
+if(!["dining","pub","book"].includes(venue)) venue="dining";
+
+const exG=id=>{const i=PB[id];return i.g?i.p/1.15:i.p};
+const band=fc=>fc<=28?"good":fc<=34?"warn":"bad";
+const money=x=>"$"+x.toFixed(2);
+const qtyTxt=(q,u)=>u==="each"?`${q} ea`:(q<1?`${Math.round(q*1000)}g`:`${q}kg`);
+
+function costDish(d){
+  const lines=d.c.map(([id,q])=>({id,q,cost:exG(id)*q}));
+  const total=lines.reduce((a,l)=>a+l.cost,0)+d.o;
+  const net=d.pn/1.15;
+  const hasEst=lines.some(l=>PB[l.id].s==="est");
+  return {lines,total,net,fc:total/net*100,hasEst};
+}
+
+function renderBook(el){
+  const rows=Object.values(PB).sort((a,b)=>(a.s>b.s?-1:1)).map(i=>`<tr><td>${i.n}</td><td class="r">$${i.p.toFixed(2)}/${i.u}${i.g?"":" ex GST"}</td><td class="r">${money(i.g?i.p/1.15:i.p)}</td><td><span class="chip ${i.s}">${i.s==="src"?"Sourced":"Needs quote"}</span></td><td>${i.url?`<a href="${i.url}" target="_blank" rel="noopener">${i.ref}</a>`:i.ref}</td></tr>`).join("");
+  const nSrc=Object.values(PB).filter(i=>i.s==="src").length, nEst=Object.values(PB).length-nSrc;
+  el.innerHTML=`<p class="brief">These are the prices behind every plate cost. ${nSrc} are published NZ prices found in September 2026 research. ${nEst} had no public price and are estimates. Get those quoted first, starting with kingfish, wagyu, sirloin and mozzarella, because they carry the most volume.</p>
+  <div class="concept"><div><b>Food inflation, Aug 2026</b><span>+1.9% a year (Stats NZ)</span></div><div><b>Meat, poultry, fish</b><span>+3.4% a year and rising</span></div><div><b>Beef mince</b><span>Record $24.40/kg. Tight into 2027</span></div><div><b>Oils and fats</b><span>−10.6% a year</span></div></div>
+  <div class="summary"><h3>Ingredient price book</h3><div class="tablewrap"><table><thead><tr><th>Ingredient</th><th class="r">Price found</th><th class="r">Ex GST</th><th>Status</th><th>Source</th></tr></thead><tbody>${rows}</tbody></table></div>
+  <p class="note" style="margin:0">Trade suppliers to set up accounts with: Bidfood (MyBidfood), Gilmours, Service Foods, Solander Wholesale for seafood, and Wellington Seamarket for daily fish. Trade price lists sit behind account logins, so ask each rep for a quote against this list.</p></div>`;
+}
+
+function render(){
+  document.body.classList.toggle("pub",venue==="pub");
+  document.querySelectorAll(".switch button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===venue));
+  const el=document.getElementById("venue");
+  if(venue==="book"){el.classList.remove("showcost");renderBook(el);return}
+  const v=V[venue];
+  el.classList.toggle("showcost",showCost);
+  let rows="", allCost=0, allNet=0;
+  const courses=v.courses.map(c=>{
+    const cs=c.items.map(costDish);
+    const avg=cs.reduce((a,x)=>a+x.fc,0)/cs.length;
+    allCost+=cs.reduce((a,x)=>a+x.total,0); allNet+=cs.reduce((a,x)=>a+x.net,0);
+    const ps=c.items.map(i=>i.pn);
+    rows+=`<tr><td>${c.h}</td><td class="r">${c.items.length}</td><td class="r">$${Math.min(...ps)}–$${Math.max(...ps)}</td><td class="r"><span class="pill ${band(avg)}">${avg.toFixed(1)}%</span></td><td class="r">${(100-avg).toFixed(1)}%</td></tr>`;
+    return `<section class="course"><h2>${c.h}<small>${c.items.length} dishes</small></h2>${c.note?`<p class="note">${c.note}</p>`:""}${c.items.map((d,k)=>{
+      const x=cs[k];
+      const li=x.lines.map(l=>{const i=PB[l.id];return `<li><span class="${i.s==="est"?"est":""}">${i.n} · ${qtyTxt(l.q,i.u)} @ ${money(exG(l.id))}/${i.u}${i.s==="est"?" (est.)":""}</span><span>${money(l.cost)}</span></li>`}).join("");
+      return `<div class="dish"><div class="n">${d.n}${d.t?`<span class="tags">${d.t}</span>`:""}</div><div class="p">${d.p}</div>${d.d?`<div class="d">${d.d}</div>`:""}<div class="cost"><div class="head"><span class="pill ${band(x.fc)}">FC ${x.fc.toFixed(1)}%</span><span>GP ${(100-x.fc).toFixed(1)}%</span><span>Plate cost ${money(x.total)}</span><span>Net ex GST ${money(x.net)}</span>${x.hasEst?`<span class="est">Includes estimates</span>`:""}</div><ul>${li}<li><span class="est">Everything else: sauce, garnish, bread, oil (est.)</span><span>${money(d.o)}</span></li></ul></div></div>`}).join("")}</section>`;
+  }).join("");
+  const blended=allCost/allNet*100;
+  el.innerHTML=`
+   <p class="brief">${v.brief}</p>
+   <div class="concept">${v.concept.map(([k,x])=>`<div><b>${k}</b><span>${x}</span></div>`).join("")}</div>
+   <div class="tools"><span class="legend">Green ≤28% · Amber 29–34% · Red 35%+ food cost</span><button class="toggle" id="costbtn">${showCost?"Hide costings":"Show costings"}</button></div>
+   ${courses}
+   <div class="summary"><h3>Seasonal & weekly specials</h3><div class="specials">${v.specials.map(([a,b])=>`<div><b>${a}</b><span>${b}</span></div>`).join("")}</div></div>
+   <div class="summary"><h3>Costing summary by section</h3><div class="tablewrap"><table><thead><tr><th>Section</th><th class="r">Dishes</th><th class="r">Price range</th><th class="r">Avg FC</th><th class="r">Avg GP</th></tr></thead><tbody>${rows}<tr><td><b>Whole menu, one of each dish</b></td><td></td><td></td><td class="r"><span class="pill ${band(blended)}">${blended.toFixed(1)}%</span></td><td class="r">${(100-blended).toFixed(1)}%</td></tr></tbody></table></div><p class="note" style="margin:0">Red items are deliberate. Crayfish, pāua and oysters are what people come to NZ for, so they build traffic and cheque size. Hold the blended number by pushing the feast, pizzas, pork belly and schnitzel, which all sit under 27%. Your real blended figure depends on sales mix, so re-run this against POS data after 4 weeks of trade.</p></div>`;
+  document.getElementById("costbtn").onclick=()=>{showCost=!showCost;try{localStorage.setItem("wpb-cost",showCost?"1":"0")}catch(e){}render()};
+}
+document.querySelectorAll(".switch button").forEach(b=>b.onclick=()=>{venue=b.dataset.v;try{localStorage.setItem("wpb-venue",venue)}catch(e){}render()});
+render();
+</script>
