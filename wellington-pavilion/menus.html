@@ -72,6 +72,11 @@ td a{color:var(--accent)}
 .chip{font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:4px;white-space:nowrap}
 .chip.src{color:var(--good);border:1px solid var(--good)}
 .chip.est{color:var(--warn);border:1px solid var(--warn)}
+.dish.star{grid-template-columns:1fr auto;padding-top:14px}
+.dish figure{grid-column:1/-1;margin:0 0 8px;position:relative;border-radius:8px;overflow:hidden;aspect-ratio:16/9;max-width:100%;background:var(--rule)}
+.dish figure img{width:100%;height:100%;object-fit:cover;display:block}
+.dish figure figcaption{position:absolute;left:10px;top:10px;font:500 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;background:var(--paper);color:var(--accent);padding:3px 8px;border-radius:4px}
+.dish figure .credit{position:absolute;right:8px;bottom:6px;font:10px var(--mono);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.7)}
 footer{color:var(--muted);font-size:13px;border-top:1px solid var(--rule);padding-top:14px;display:grid;gap:8px}
 </style>
 
@@ -140,22 +145,22 @@ dining:{
   concept:[["Style","Share plates, wood fire and charcoal"],["Target spend","$105 food / $155 total per head"],["Target food cost","30–32% blended"],["Covers","95 seats, 2 turns Fri–Sat"]],
   courses:[
    {h:"Raw & Snacks",note:"Out of the kitchen first. Priced to add on. Bluff oysters replace Te Kouma from March to August.",items:[
-    {n:"Te Kouma oysters",d:"Kawakawa mignonette, finger lime",p:"6.5 ea",pn:6.5,t:"GF DF",c:[["oys_tk",1]],o:0.30},
+    {img:"photos/oysters.jpg",n:"Te Kouma oysters",d:"Kawakawa mignonette, finger lime",p:"6.5 ea",pn:6.5,t:"GF DF",c:[["oys_tk",1]],o:0.30},
     {n:"Wood-fired flatbread",d:"Whipped smoked kahawai, horopito oil",p:"18",pn:18,t:"DF",c:[["flour",0.12]],o:2.2},
     {n:"Kūmara & feta borek",d:"Chilli honey, sesame",p:"9 ea",pn:9,t:"V",c:[["kumara",0.06],["feta",0.02]],o:0.9},
     {n:"Gordal olives",d:"Warm, orange peel, fennel seed",p:"12",pn:12,t:"VG GF",c:[],o:2.2}]},
    {h:"Small Plates",note:"",items:[
-    {n:"Kingfish crudo",d:"Blood orange, ponzu, kawakawa oil, radish",p:"29",pn:29,t:"GF DF",c:[["kingfish",0.08]],o:1.6},
-    {n:"Pāua carpaccio",d:"Brown butter, pickled kohlrabi, crispy capers",p:"34",pn:34,t:"GF",c:[["paua",0.06],["butter",0.02]],o:1.5},
+    {img:"photos/kingfish-crudo.jpg",n:"Kingfish crudo",d:"Blood orange, ponzu, kawakawa oil, radish",p:"29",pn:29,t:"GF DF",c:[["kingfish",0.08]],o:1.6},
+    {img:"photos/paua.jpg",n:"Pāua carpaccio",d:"Brown butter, pickled kohlrabi, crispy capers",p:"34",pn:34,t:"GF",c:[["paua",0.06],["butter",0.02]],o:1.5},
     {n:"Tuatua",d:"'Nduja, white wine, fennel, grilled bread",p:"32",pn:32,t:"",c:[["tuatua",0.4]],o:2.6},
     {n:"Beef tartare",d:"Smoked egg yolk, horopito, rēwena crisp",p:"28",pn:28,t:"DF",c:[["eyefillet",0.09]],o:1.6},
     {n:"Grilled arrow squid",d:"'Nduja, burnt lemon, fried capers",p:"27",pn:27,t:"GF DF",c:[["squid",0.16]],o:1.8},
     {n:"Charred kūmara",d:"Whipped feta, hot honey, dukkah",p:"24",pn:24,t:"V GF",c:[["kumara",0.25],["feta",0.06]],o:1.3}]},
    {h:"Large Plates",note:"Built to share.",items:[
-    {n:"Whole snapper, approx. 1kg",d:"Charcoal grilled, salsa verde, chilli-lemon butter",p:"79",pn:79,t:"GF",c:[["snapper",1.0],["butter",0.04]],o:3.0},
+    {img:"photos/snapper.jpg",n:"Whole snapper, approx. 1kg",d:"Charcoal grilled, salsa verde, chilli-lemon butter",p:"79",pn:79,t:"GF",c:[["snapper",1.0],["butter",0.04]],o:3.0},
     {n:"Hāpuku",d:"Brown butter, tuatua, sea herbs",p:"49",pn:49,t:"GF",c:[["hapuku",0.2],["tuatua",0.1],["butter",0.03]],o:2.0},
-    {n:"Half crayfish",d:"Garlic-chilli butter, charred lemon",p:"MP ~139",pn:139,t:"GF",c:[["cray",0.45],["butter",0.04]],o:2.5},
-    {n:"Slow-roasted lamb shoulder, for 2–3",d:"Labneh, pomegranate, sumac onion, flatbread",p:"118",pn:118,t:"",c:[["lamb_sh",1.6]],o:7.0},
+    {img:"photos/crayfish.jpg",n:"Half crayfish",d:"Garlic-chilli butter, charred lemon",p:"MP ~139",pn:139,t:"GF",c:[["cray",0.45],["butter",0.04]],o:2.5},
+    {img:"photos/lamb-shoulder.jpg",n:"Slow-roasted lamb shoulder, for 2–3",d:"Labneh, pomegranate, sumac onion, flatbread",p:"118",pn:118,t:"",c:[["lamb_sh",1.6]],o:7.0},
     {n:"Venison backstrap",d:"Beetroot, Black Doris plum, juniper",p:"52",pn:52,t:"GF DF",c:[["venison",0.18]],o:3.2},
     {n:"First Light wagyu rump MBS 6+, 250g",d:"Bone marrow jus, fresh horseradish",p:"74",pn:74,t:"GF",c:[["wagyu",0.25]],o:3.0},
     {n:"Pappardelle",d:"Slow-cooked lamb ragù, pecorino, mint",p:"42",pn:42,t:"",c:[["lamb_sh",0.25],["flour",0.12]],o:2.2},
@@ -167,7 +172,7 @@ dining:{
     {n:"Charred broccolini",d:"Anchovy, almond, lemon",p:"15",pn:15,t:"GF DF",c:[],o:3.2},
     {n:"Leaves",d:"Fennel, chardonnay vinaigrette",p:"13",pn:13,t:"VG GF",c:[],o:2.1}]},
    {h:"Dessert",note:"",items:[
-    {n:"Pavlova",d:"Passionfruit curd, strawberries, kawakawa cream",p:"19",pn:19,t:"V GF",c:[],o:3.6},
+    {img:"photos/pavlova.jpg",n:"Pavlova",d:"Passionfruit curd, strawberries, kawakawa cream",p:"19",pn:19,t:"V GF",c:[],o:3.6},
     {n:"Dark chocolate crémeux",d:"Mānuka honey caramel, hazelnut praline",p:"21",pn:21,t:"V GF",c:[["butter",0.02]],o:3.8},
     {n:"Olive oil cake",d:"Poached tamarillo, mascarpone",p:"18",pn:18,t:"V",c:[["butter",0.03]],o:2.8},
     {n:"Three NZ cheeses",d:"Kāpiti, Whitestone, Barry's Bay. Lavosh, honeycomb",p:"34",pn:34,t:"V",c:[],o:9.5}]},
@@ -191,21 +196,21 @@ pub:{
     {n:"Hot honey fried chicken",d:"Pickles, ranch",p:"20",pn:20,t:"",c:[["chk_thigh",0.16]],o:1.2},
     {n:"Pork & fennel sausage roll",d:"House tomato relish",p:"15",pn:15,t:"",c:[["porkmince",0.12],["flour",0.08]],o:1.4},
     {n:"Tarakihi tacos, 2",d:"Battered tarakihi, slaw, chipotle mayo",p:"20",pn:20,t:"",c:[["tarakihi",0.1]],o:1.8},
-    {n:"Marlborough mussel pot",d:"Chorizo, tomato, white wine, grilled bread",p:"29",pn:29,t:"DF",c:[["mussels",0.8]],o:2.8}]},
+    {img:"photos/mussels.jpg",n:"Marlborough mussel pot",d:"Chorizo, tomato, white wine, grilled bread",p:"29",pn:29,t:"DF",c:[["mussels",0.8]],o:2.8}]},
    {h:"Wood-fired Pizza",note:"Gluten-free base +$4.",items:[
     {n:"Margherita",d:"San Marzano, fior di latte, basil",p:"25",pn:25,t:"V",c:[["flour",0.18],["mozz",0.12]],o:1.4},
-    {n:"Pepperoni",d:"Hot honey, oregano, chilli",p:"29",pn:29,t:"",c:[["flour",0.18],["mozz",0.12]],o:3.0},
+    {img:"photos/pizza.jpg",n:"Pepperoni",d:"Hot honey, oregano, chilli",p:"29",pn:29,t:"",c:[["flour",0.18],["mozz",0.12]],o:3.0},
     {n:"Garlic prawn",d:"Chilli, lemon, rocket, parsley",p:"32",pn:32,t:"",c:[["flour",0.18],["mozz",0.1],["prawns",0.12]],o:1.6},
     {n:"Mushroom",d:"Truffle cream, thyme, parmesan",p:"28",pn:28,t:"V",c:[["flour",0.18],["mozz",0.1]],o:2.8},
     {n:"Lamb",d:"Pulled shoulder, harissa, mint yoghurt",p:"30",pn:30,t:"",c:[["flour",0.18],["mozz",0.1],["lamb_sh",0.12]],o:1.4},
     {n:"The Hawaiian, done properly",d:"Leg ham, charred pineapple, jalapeño",p:"28",pn:28,t:"",c:[["flour",0.18],["mozz",0.12]],o:2.6}]},
    {h:"Burgers",note:"All served with chips.",items:[
-    {n:"Pav double cheeseburger",d:"Two smashed patties, American cheese, pickles, burger sauce",p:"27",pn:27,t:"",c:[["mince",0.2],["potato",0.25]],o:2.3},
+    {img:"photos/burger.jpg",n:"Pav double cheeseburger",d:"Two smashed patties, American cheese, pickles, burger sauce",p:"27",pn:27,t:"",c:[["mince",0.2],["potato",0.25]],o:2.3},
     {n:"The Kiwi burger",d:"Beef, beetroot, fried egg, pineapple, cheddar",p:"28",pn:28,t:"",c:[["mince",0.18],["potato",0.25]],o:2.6},
     {n:"Crispy chicken burger",d:"Buttermilk thigh, slaw, hot honey mayo",p:"27",pn:27,t:"",c:[["chk_thigh",0.17],["potato",0.25]],o:2.0},
     {n:"Tarakihi burger",d:"Beer-battered tarakihi, tartare, iceberg",p:"28",pn:28,t:"",c:[["tarakihi",0.14],["potato",0.25]],o:1.8}]},
    {h:"Mains",note:"",items:[
-    {n:"Beer-battered tarakihi & chips",d:"Tartare, lemon, leaves. Swap to blue cod at market price",p:"33",pn:33,t:"DF",c:[["tarakihi",0.18],["potato",0.3]],o:1.5},
+    {img:"photos/fish-chips.jpg",n:"Beer-battered tarakihi & chips",d:"Tartare, lemon, leaves. Swap to blue cod at market price",p:"33",pn:33,t:"DF",c:[["tarakihi",0.18],["potato",0.3]],o:1.5},
     {n:"Chicken schnitzel",d:"Chips, slaw, gravy. Parmi +$4",p:"30",pn:30,t:"",c:[["chk_breast",0.22],["potato",0.3]],o:1.7},
     {n:"Sirloin 300g",d:"Chips, café de Paris butter, leaves",p:"46",pn:46,t:"GF",c:[["sirloin",0.3],["potato",0.3],["butter",0.03]],o:1.2},
     {n:"Braised lamb shank",d:"Kūmara mash, red wine jus, greens",p:"38",pn:38,t:"GF",c:[["shank",0.5],["kumara",0.25],["butter",0.03]],o:1.4},
@@ -213,7 +218,7 @@ pub:{
     {n:"Chicken Caesar",d:"Cos, bacon, soft egg, parmesan",p:"27",pn:27,t:"",c:[["chk_breast",0.15]],o:2.4},
     {n:"Grain bowl",d:"Roast kūmara, freekeh, hummus, dukkah. Add chicken +$7",p:"25",pn:25,t:"VG DF",c:[["kumara",0.2]],o:2.6}]},
    {h:"To Share",note:"",items:[
-    {n:"Pavilion seafood platter, for 2",d:"Oysters, tuatua, mussels, squid, tarakihi, chips, sauces",p:"119",pn:119,t:"",c:[["oys_tk",6],["tuatua",0.3],["mussels",0.5],["squid",0.2],["tarakihi",0.25],["potato",0.4]],o:5.0},
+    {img:"photos/seafood-platter.jpg",n:"Pavilion seafood platter, for 2",d:"Oysters, tuatua, mussels, squid, tarakihi, chips, sauces",p:"119",pn:119,t:"",c:[["oys_tk",6],["tuatua",0.3],["mussels",0.5],["squid",0.2],["tarakihi",0.25],["potato",0.4]],o:5.0},
     {n:"Mixed grill board, for 2",d:"Sirloin, pork belly, chicken thigh, chips, sauces",p:"95",pn:95,t:"",c:[["sirloin",0.25],["pork_belly",0.25],["chk_thigh",0.2],["potato",0.4]],o:4.0}]},
    {h:"Kids, under 12",note:"Includes a juice and a hokey pokey soft serve. Kids meals run above target on purpose: they bring the parents in.",items:[
     {n:"Fish & chips",d:"",p:"18",pn:18,t:"",c:[["tarakihi",0.09],["potato",0.15]],o:2.4},
@@ -227,6 +232,7 @@ pub:{
   specials:[["Whitebait season, Sept–Nov","Whitebait fritter sandwich, white bread, lemon, $28. Runs about 40% food cost, but it gets people in"],["Tuesday Parmi Night","$24 parmi and a pint. Midweek filler"],["Thursday Steak Night","$36 sirloin with a glass of red"],["Sunday Roast","Roast lamb, kūmara, gravy, $32. Live music from 3pm"]]
 }};
 
+const CREDITS={};
 let venue="dining", showCost=false;
 try{venue=localStorage.getItem("wp-venue")||"dining"; showCost=localStorage.getItem("wp-cost")==="1"}catch(e){}
 if(!["dining","pub","book"].includes(venue)) venue="dining";
@@ -270,7 +276,8 @@ function render(){
     return `<section class="course"><h2>${c.h}<small>${c.items.length} dishes</small></h2>${c.note?`<p class="note">${c.note}</p>`:""}${c.items.map((d,k)=>{
       const x=cs[k];
       const li=x.lines.map(l=>{const i=PB[l.id];return `<li><span class="${i.s==="est"?"est":""}">${i.n} · ${qtyTxt(l.q,i.u)} @ ${money(exG(l.id))}/${i.u}${i.s==="est"?" (est.)":""}</span><span>${money(l.cost)}</span></li>`}).join("");
-      return `<div class="dish"><div class="n">${d.n}${d.t?`<span class="tags">${d.t}</span>`:""}</div><div class="p">${d.p}</div>${d.d?`<div class="d">${d.d}</div>`:""}<div class="cost"><div class="head"><span class="pill ${band(x.fc)}">FC ${x.fc.toFixed(1)}%</span><span>GP ${(100-x.fc).toFixed(1)}%</span><span>Plate cost ${money(x.total)}</span><span>Net ex GST ${money(x.net)}</span>${x.hasEst?`<span class="est">Includes estimates</span>`:""}</div><ul>${li}<li><span class="est">Everything else: sauce, garnish, bread, oil (est.)</span><span>${money(d.o)}</span></li></ul></div></div>`}).join("")}</section>`;
+      const fig=d.img?`<figure><img src="${d.img}" alt="${d.n}" loading="lazy" onerror="this.parentElement.hidden=true"><figcaption>Star dish</figcaption>${CREDITS[d.img]?`<span class="credit">${CREDITS[d.img]}</span>`:""}</figure>`:"";
+      return `<div class="dish${d.img?" star":""}">${fig}<div class="n">${d.n}${d.t?`<span class="tags">${d.t}</span>`:""}</div><div class="p">${d.p}</div>${d.d?`<div class="d">${d.d}</div>`:""}<div class="cost"><div class="head"><span class="pill ${band(x.fc)}">FC ${x.fc.toFixed(1)}%</span><span>GP ${(100-x.fc).toFixed(1)}%</span><span>Plate cost ${money(x.total)}</span><span>Net ex GST ${money(x.net)}</span>${x.hasEst?`<span class="est">Includes estimates</span>`:""}</div><ul>${li}<li><span class="est">Everything else: sauce, garnish, bread, oil (est.)</span><span>${money(d.o)}</span></li></ul></div></div>`}).join("")}</section>`;
   }).join("");
   const blended=allCost/allNet*100;
   el.innerHTML=`
